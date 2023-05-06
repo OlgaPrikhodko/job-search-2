@@ -19,14 +19,23 @@
             </li>
           </ul>
         </nav>
+
+        <div class="ml-auto flex h-full items-center">
+          <ActionButton />
+        </div>
       </div>
     </div>
   </header>
 </template>
 
 <script>
+import ActionButton from "@/components/ActionButton.vue";
+
 export default {
   name: "MainNav",
+  components: {
+    ActionButton,
+  },
   data() {
     return {
       company: "Bobo Careers",
