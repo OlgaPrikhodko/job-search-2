@@ -4,14 +4,23 @@ import userEvent from "@testing-library/user-event";
 import MainNav from "@/components/MainNav.vue";
 
 describe("MainNav", () => {
+  const renderMainNav = () => {
+    render(MainNav, {
+      global: {
+        stubs: {
+          FontAwesomeIcon: true,
+        },
+      },
+    });
+  };
   it("displays company name", () => {
-    render(MainNav);
+    renderMainNav();
     const companyName = screen.getByText("Bobo Careers");
     expect(companyName).toBeInTheDocument();
   });
 
   it("displays menu items for navigation", () => {
-    render(MainNav);
+    renderMainNav();
     const navMenuItems = screen.getAllByRole("listitem");
     const navMenuTexts = navMenuItems.map((menuItem) => menuItem.textContent);
     expect(navMenuTexts).toEqual([
@@ -26,7 +35,7 @@ describe("MainNav", () => {
 
   describe("when the user logs in", () => {
     it("displays sign in button for unlogined user", async () => {
-      render(MainNav);
+      renderMainNav();
 
       const loginButton = screen.getByRole("button", {
         name: /sign in/i,
@@ -36,7 +45,7 @@ describe("MainNav", () => {
     });
 
     it("displays user profile picture", async () => {
-      render(MainNav);
+      renderMainNav();
 
       let profileImage = screen.queryByRole("img", {
         name: /user profile image/i,
