@@ -5,9 +5,10 @@
     <font-awesome-icon :icon="['fas', 'search']" class="ml-4 mr-3" />
 
     <div class="flex-no-wrap flex h-full flex-1 text-base font-light">
-      <div class="relative h-full flex-1 items-center pr-3">
+      <div class="relative flex h-full flex-1 items-center pr-3">
         <label class="absolute -top-10 left-0" for="">Role</label>
         <input
+          v-model="role"
           type="text"
           placeholder="Software ingeneer"
           class="w-full text-lg font-normal focus:outline-none"
@@ -20,9 +21,10 @@
         in
       </span>
 
-      <div class="relative h-full flex-1 items-center pl-3">
+      <div class="relative flex h-full flex-1 items-center pl-3">
         <label class="absolute -top-10 left-0" for="">Where</label>
         <input
+          v-model="location"
           type="text"
           placeholder="Los Angeles"
           class="w-full text-lg font-normal focus:outline-none"
@@ -40,5 +42,11 @@ import ActionButton from "@/components/ActionButton.vue";
 export default {
   name: "JobSearchForm",
   components: { ActionButton },
+  data() {
+    return {
+      role: "",
+      location: "",
+    };
+  },
 };
 </script>
