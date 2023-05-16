@@ -6,9 +6,7 @@
 
     <div class="mx-auto mt-8">
       <div class="flex flex-row flex-nowrap">
-        <p class="flex-grow text-sm">
-          Page {{ currentPage }} of {{ lastPage }}
-        </p>
+        <p class="flex-grow text-sm">Page {{ currentPage }}</p>
 
         <div class="flex items-center justify-center">
           <router-link
