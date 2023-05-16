@@ -11,6 +11,7 @@
         <div class="flex items-center justify-center">
           <router-link
             v-if="prevPage"
+            role="link"
             :to="{ name: 'JobResults', query: { page: prevPage } }"
             class="mx-3 text-sm font-semibold text-brand-blue-1"
           >
@@ -19,6 +20,7 @@
         </div>
         <router-link
           v-if="nextPage"
+          role="link"
           :to="{ name: 'JobResults', query: { page: nextPage } }"
           class="mx-3 text-sm font-semibold text-brand-blue-1"
         >
@@ -47,7 +49,7 @@ export default {
       return Number.parseInt(this.$route.query.page || 1);
     },
     lastPage() {
-      return Math.floor(this.jobs.length / 10);
+      return Math.ceil(this.jobs.length / 10);
     },
     prevPage() {
       const prevPage = this.currentPage - 1;
