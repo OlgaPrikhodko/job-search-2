@@ -5,8 +5,27 @@
     </ol>
 
     <div class="mx-auto mt-8">
-      <div class="flaex flex-row flex-nowrap">
-        <p class="flex-grow text-sm">Page {{ currentPage }}</p>
+      <div class="flex flex-row flex-nowrap">
+        <p class="flex-grow text-sm">
+          Page {{ currentPage }} of {{ lastPage }}
+        </p>
+
+        <div class="flex items-center justify-center">
+          <router-link
+            v-if="prevPage"
+            :to="{ name: 'JobResults', query: { page: prevPage } }"
+            class="mx-3 text-sm font-semibold text-brand-blue-1"
+          >
+            Previous
+          </router-link>
+        </div>
+        <router-link
+          v-if="nextPage"
+          :to="{ name: 'JobResults', query: { page: nextPage } }"
+          class="mx-3 text-sm font-semibold text-brand-blue-1"
+        >
+          Next
+        </router-link>
       </div>
     </div>
   </main>
@@ -29,7 +48,18 @@ export default {
     currentPage() {
       return Number.parseInt(this.$route.query.page || 1);
     },
-
+    lastPage() {
+      return Math.floor(this.jobs.length / 10);
+    },
+    prevPage() {
+      const prevPage = this.currentPage - 1;
+      const firstPage = 1;
+      return prevPage >= firstPage ? prevPage : undefined;
+    },
+    nextPage() {
+      const nextPage = this.currentPage + 1;
+      return nextPage <= this.lastPage ? nextPage : undefined;
+    },
     displayedJobs() {
       const pageNumber = this.currentPage;
       const firstJobIndex = (pageNumber - 1) * 10;
