@@ -30,4 +30,26 @@ describe("actions", () => {
       expect(store.jobs).toEqual(["Job 1", "Job 2"]);
     });
   });
+
+  describe("getters", () => {
+    beforeEach(() => {
+      setActivePinia(createPinia());
+    });
+
+    describe("UNIQUE_ORGANIZATIONS", () => {
+      it("finds unique organizations", () => {
+        const store = useJobsStore();
+        store.jobs = [
+          { organization: "Google" },
+          { organization: "Amazon" },
+          { organization: "Google" },
+        ];
+
+        console.log(store);
+        const result = store.UNIQUE_ORGANIZATIONS;
+
+        expect(result).toEqual(new Set(["Google", "Amazon"]));
+      });
+    });
+  });
 });
