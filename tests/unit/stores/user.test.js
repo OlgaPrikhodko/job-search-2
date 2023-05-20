@@ -11,6 +11,11 @@ describe("state", () => {
     const store = useUserStore();
     expect(store.isLoggedIn).toBeFalsy();
   });
+
+  it("stores organizations that the user would like to filter jobs by", () => {
+    const store = useUserStore();
+    expect(store.selectedOrganizations).toEqual([]);
+  });
 });
 
 describe("actions", () => {
@@ -18,11 +23,19 @@ describe("actions", () => {
     setActivePinia(createPinia());
   });
 
-  describe("logginUser", () => {
+  describe("loginUser", () => {
     it("logs user in", () => {
       const store = useUserStore();
       store.loginUser();
       expect(store.isLoggedIn).toBeTruthy();
+    });
+  });
+
+  describe("ADD_SELECTED_ORGANIZATIONS", () => {
+    it("updates organizations the user has chosen to filter jobs", () => {
+      const store = useUserStore();
+      store.ADD_SELECTED_ORGANIZATIONS(["Google", "Amazon"]);
+      expect(store.selectedOrganizations).toEqual(["Google", "Amazon"]);
     });
   });
 });
