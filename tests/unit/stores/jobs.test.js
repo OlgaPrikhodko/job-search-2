@@ -72,5 +72,25 @@ describe("actions", () => {
         ]);
       });
     });
+
+    describe("when the user has not selected any organizations", () => {
+      it("returns all jobs", () => {
+        const userStore = useUserStore();
+        userStore.selectedOrganizations = [];
+
+        const jobStore = useJobsStore();
+        jobStore.jobs = [
+          { id: 1, organization: "Google" },
+          { id: 2, organization: "Amazon" },
+          { id: 4, organization: "Microsoft" },
+        ];
+
+        expect(jobStore.FILTERED_JOBS_BY_ORGANIZATIONS).toEqual([
+          { id: 1, organization: "Google" },
+          { id: 2, organization: "Amazon" },
+          { id: 4, organization: "Microsoft" },
+        ]);
+      });
+    });
   });
 });
