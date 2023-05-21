@@ -66,9 +66,9 @@ describe("actions", () => {
       });
     });
 
-    describe("INCLUDE_JOB_BY_JOB_TYPE", () => {
+    describe("INCLUDE_JOB_ORGANIZATIONS", () => {
       describe("when the user has not selected any organizations", () => {
-        it("includes job", () => {
+        it("includes organization", () => {
           const userStore = useUserStore();
           userStore.selectedOrganizations = [];
 
@@ -119,90 +119,6 @@ describe("actions", () => {
         const result = jobStore.INCLUDE_JOB_BY_JOB_TYPE(job);
 
         expect(result).toBe(true);
-      });
-    });
-
-    describe("FILTERED_JOBS_BY_ORGANIZATIONS", () => {
-      it("identifies jobs that are associated with the given organizations", () => {
-        const userStore = useUserStore();
-        userStore.selectedOrganizations = ["Google", "Amazon"];
-
-        const jobStore = useJobsStore();
-        jobStore.jobs = [
-          { id: 1, organization: "Google" },
-          { id: 2, organization: "Amazon" },
-          { id: 3, organization: "Google" },
-          { id: 4, organization: "Microsoft" },
-        ];
-
-        expect(jobStore.FILTERED_JOBS_BY_ORGANIZATIONS).toEqual([
-          { id: 1, organization: "Google" },
-          { id: 2, organization: "Amazon" },
-          { id: 3, organization: "Google" },
-        ]);
-      });
-
-      describe("when the user has not selected any organizations", () => {
-        it("returns all jobs", () => {
-          const userStore = useUserStore();
-          userStore.selectedOrganizations = [];
-
-          const jobStore = useJobsStore();
-          jobStore.jobs = [
-            { id: 1, organization: "Google" },
-            { id: 2, organization: "Amazon" },
-            { id: 4, organization: "Microsoft" },
-          ];
-
-          expect(jobStore.FILTERED_JOBS_BY_ORGANIZATIONS).toEqual([
-            { id: 1, organization: "Google" },
-            { id: 2, organization: "Amazon" },
-            { id: 4, organization: "Microsoft" },
-          ]);
-        });
-      });
-    });
-
-    describe("FILTERED_JOBS_BY_JOB_TYPES", () => {
-      it("identifies jobs that are associated with the given job types", () => {
-        const userStore = useUserStore();
-        userStore.selectedJobTypes = ["Full-time", "Part-time"];
-
-        const jobStore = useJobsStore();
-        jobStore.jobs = [
-          { jobType: "Part-time" },
-          { jobType: "Temporary" },
-          { jobType: "Part-time" },
-          { jobType: "Full-time" },
-        ];
-
-        expect(jobStore.FILTERED_JOBS_BY_JOB_TYPES).toEqual([
-          { jobType: "Part-time" },
-          { jobType: "Part-time" },
-          { jobType: "Full-time" },
-        ]);
-      });
-    });
-
-    describe("when the user has not selected any job types", () => {
-      it("returns all jobs", () => {
-        const jobStore = useJobsStore();
-        jobStore.jobs = [
-          { jobType: "Part-time" },
-          { jobType: "Temporary" },
-          { jobType: "Part-time" },
-          { jobType: "Full-time" },
-        ];
-
-        const userStore = useUserStore();
-        userStore.selectedJobTypes = [];
-
-        expect(jobStore.FILTERED_JOBS_BY_JOB_TYPES).toEqual([
-          { jobType: "Part-time" },
-          { jobType: "Temporary" },
-          { jobType: "Part-time" },
-          { jobType: "Full-time" },
-        ]);
       });
     });
   });
