@@ -6,7 +6,7 @@ import JobListing from "@/components/JobResults/JobListing.vue";
 describe("JobListing", () => {
   const createJobProps = (jobProps = {}) => ({
     title: "Vue Developer",
-    organisation: "AirBnB",
+    organization: "AirBnB",
     locations: ["New York"],
     minimumQualifications: ["Code"],
     ...jobProps,
@@ -34,8 +34,8 @@ describe("JobListing", () => {
     expect(screen.getByText("Vue Developer")).toBeInTheDocument();
   });
 
-  it("renders job organisation", () => {
-    const jobProps = createJobProps({ organisation: "AirBnB" });
+  it("renders job organization", () => {
+    const jobProps = createJobProps({ organization: "AirBnB" });
 
     renderJobListing(jobProps);
 
