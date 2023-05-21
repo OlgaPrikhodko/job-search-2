@@ -66,6 +66,62 @@ describe("actions", () => {
       });
     });
 
+    describe("INCLUDE_JOB_BY_JOB_TYPE", () => {
+      describe("when the user has not selected any organizations", () => {
+        it("includes job", () => {
+          const userStore = useUserStore();
+          userStore.selectedOrganizations = [];
+
+          const jobStore = useJobsStore();
+
+          const job = { organization: "Google" };
+          const result = jobStore.INCLUDE_JOB_BY_ORGANIZATION(job);
+
+          expect(result).toBe(true);
+        });
+      });
+
+      it("identifies if job is associated with given organization", () => {
+        const userStore = useUserStore();
+        userStore.selectedOrganizations = ["Google", "Amazon"];
+
+        const jobStore = useJobsStore();
+
+        const job = { organization: "Google" };
+        const result = jobStore.INCLUDE_JOB_BY_ORGANIZATION(job);
+
+        expect(result).toBe(true);
+      });
+    });
+
+    describe("INCLUDE_JOB_BY_JOB_TYPE", () => {
+      describe("when the user has not selected any job types", () => {
+        it("includes job", () => {
+          const userStore = useUserStore();
+          userStore.selectedJobTypes = [];
+
+          const jobStore = useJobsStore();
+
+          const job = { jobType: "Part-time" };
+          const result = jobStore.INCLUDE_JOB_BY_JOB_TYPE(job);
+
+          expect(result).toBe(true);
+        });
+      });
+
+      it("identifies if job is associated with given job type", () => {
+        const userStore = useUserStore();
+        userStore.selectedJobTypes = ["Part-time", "Temporaty"];
+
+        const jobStore = useJobsStore();
+
+        const job = { jobType: "Part-time" };
+        const result = jobStore.INCLUDE_JOB_BY_JOB_TYPE(job);
+
+        expect(result).toBe(true);
+      });
+    });
+
     describe("FILTERED_JOBS_BY_ORGANIZATIONS", () => {
       it("identifies jobs that are associated with the given organizations", () => {
         const userStore = useUserStore();

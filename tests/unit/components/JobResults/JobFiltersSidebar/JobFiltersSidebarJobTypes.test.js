@@ -4,6 +4,7 @@ import { createTestingPinia } from "@pinia/testing";
 
 import { useJobsStore } from "@/stores/jobs";
 import { useUserStore } from "@/stores/user";
+
 import JobFiltersSidebarJobTypes from "@/components/JobResults/JobFiltersSidebar/JobFiltersSidebarJobTypes.vue";
 
 describe("JobFiltersSidebarJobTypes", () => {
