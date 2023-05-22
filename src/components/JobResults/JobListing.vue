@@ -30,7 +30,7 @@
 
       <div class="px-8 py-4">
         <div>
-          <h3 class="mb-2 mt-1">Qualification</h3>
+          <h3 class="mb-2 mt-1">Qualifications:</h3>
 
           <div>
             <ul class="list-disc pl-8">
