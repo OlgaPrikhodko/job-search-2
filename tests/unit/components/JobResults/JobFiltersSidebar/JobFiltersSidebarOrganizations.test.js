@@ -1,6 +1,8 @@
 import { render, screen } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
 import { createTestingPinia } from "@pinia/testing";
+import { useRouter } from "vue-router";
+vi.mock("vue-router");
 
 import { useJobsStore } from "@/stores/jobs";
 import { useUserStore } from "@/stores/user";
@@ -13,17 +15,14 @@ describe("JobFiltersSidebarOrganizations", () => {
     const userStore = useUserStore();
     const jobStore = useJobsStore();
 
-    const $router = { push: vi.fn() };
-
     render(JobFiltersSidebarOrganizations, {
       global: {
         plugins: [pinia],
-        mocks: { $router },
         stubs: { FontAwesomeIcon: true },
       },
     });
 
-    return { jobStore, userStore, $router };
+    return { jobStore, userStore };
   };
 
   it("renders unique list of organizations from jobs", async () => {
@@ -42,6 +41,8 @@ describe("JobFiltersSidebarOrganizations", () => {
 
   describe("when the user clicks checkbox", () => {
     it("communicates that user has selected checkbox for organizations", async () => {
+      useRouter.mockReturnValue({ push: vi.fn() });
+
       const { jobStore, userStore } = renderJobFiltersSidebarOrganizations();
 
       jobStore.UNIQUE_ORGANIZATIONS = new Set(["Google", "Amazon"]);
@@ -58,7 +59,9 @@ describe("JobFiltersSidebarOrganizations", () => {
     });
 
     it("navigates user to job results page to see fresh batch of filtered jobs", async () => {
-      const { jobStore, $router } = renderJobFiltersSidebarOrganizations();
+      const push = vi.fn();
+      useRouter.mockReturnValue({ push });
+      const { jobStore } = renderJobFiltersSidebarOrganizations();
 
       jobStore.UNIQUE_ORGANIZATIONS = new Set(["Google", "Amazon"]);
 
@@ -68,7 +71,7 @@ describe("JobFiltersSidebarOrganizations", () => {
       const checkbox = screen.getByRole("checkbox", { name: /amazon/i });
       await userEvent.click(checkbox);
 
-      expect($router.push).toHaveBeenCalledWith({ name: "JobResults" });
+      expect(push).toHaveBeenCalledWith({ name: "JobResults" });
     });
   });
 });
