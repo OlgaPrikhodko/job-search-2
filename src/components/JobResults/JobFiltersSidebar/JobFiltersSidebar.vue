@@ -13,12 +13,13 @@
       <CollapsibleAccordion header="Degree" />
 
       <JobFiltersSidebarCheckboxGroup
-        header="Job Types!"
+        header="Job Types"
         :unique-values="UNIQUE_JOB_TYPES"
         :action="userStore.ADD_SELECTED_JOB_TYPES"
       />
+
       <JobFiltersSidebarCheckboxGroup
-        header="Organizations!"
+        header="Organizations"
         :unique-values="UNIQUE_ORGANIZATIONS"
         :action="userStore.ADD_SELECTED_ORGANIZATIONS"
       />
