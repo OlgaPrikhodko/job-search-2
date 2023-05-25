@@ -20,10 +20,10 @@ describe("CollapsibleAccordion", () => {
 
     const config = { props, slots };
     renderCollapsibleAccordion(config);
-    screen.debug();
     expect(screen.queryByText("My nested child")).not.toBeInTheDocument();
     const button = screen.getByRole("button", { name: /my/i });
     await userEvent.click(button);
+
     expect(screen.getByText("My nested child")).toBeInTheDocument();
   });
 
