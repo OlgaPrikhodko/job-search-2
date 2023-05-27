@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { fileURLToPath, URL } from "node:url";
 
 import { defineConfig } from "vite";
@@ -13,6 +14,6 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    setupFiles: ["./tests/setup.js"]
+    setupFiles: ["./tests/setup.js"],
   },
 });
