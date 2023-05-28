@@ -1,5 +1,3 @@
-import type { Job } from "@/api/types";
-
 import { defineStore } from "pinia";
 
 export const ADD_SELECTED_ORGANIZATIONS = "ADD_SELECTED_ORGANIZATIONS";
