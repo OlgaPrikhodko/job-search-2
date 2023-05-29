@@ -31,7 +31,7 @@
   </main>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { useRoute } from "vue-router";
 import { computed, onMounted } from "vue";
 
@@ -43,7 +43,7 @@ import usePrevAndNextPages from "@/composables/usePrevAndNextPages";
 const route = useRoute();
 
 const currentPage = computed(() => {
-  return Number.parseInt(route.query.page || 1);
+  return Number.parseInt((route.query.page as string) || "1");
 });
 
 const jobsStore = useJobsStore();
