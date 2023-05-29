@@ -2,17 +2,19 @@ import { render, screen } from "@testing-library/vue";
 import { RouterLinkStub } from "@vue/test-utils";
 
 import JobListing from "@/components/JobResults/JobListing.vue";
+import { createJob } from "tests/utils/createJob";
+import type { Job } from "@/api/types";
 
 describe("JobListing", () => {
-  const createJobProps = (jobProps = {}) => ({
-    title: "Vue Developer",
-    organization: "AirBnB",
-    locations: ["New York"],
-    minimumQualifications: ["Code"],
-    ...jobProps,
-  });
+  // const createJob = (jobProps = {}) => ({
+  //   title: "Vue Developer",
+  //   organization: "AirBnB",
+  //   locations: ["New York"],
+  //   minimumQualifications: ["Code"],
+  //   ...jobProps,
+  // });
 
-  const renderJobListing = (jobProps) => {
+  const renderJobListing = (job: Job) => {
     render(JobListing, {
       global: {
         stubs: {
@@ -21,21 +23,21 @@ describe("JobListing", () => {
       },
       props: {
         job: {
-          ...jobProps,
+          ...job,
         },
       },
     });
   };
 
   it("renders job title", () => {
-    const jobProps = createJobProps({ title: "Vue Developer" });
+    const jobProps = createJob({ title: "Vue Developer" });
     renderJobListing(jobProps);
 
     expect(screen.getByText("Vue Developer")).toBeInTheDocument();
   });
 
   it("renders job organization", () => {
-    const jobProps = createJobProps({ organization: "AirBnB" });
+    const jobProps = createJob({ organization: "AirBnB" });
 
     renderJobListing(jobProps);
 
@@ -43,14 +45,14 @@ describe("JobListing", () => {
   });
 
   it("renders job locations", () => {
-    const jobProps = createJobProps({ locations: ["Orlando", "NYC"] });
+    const jobProps = createJob({ locations: ["Orlando", "NYC"] });
     renderJobListing(jobProps);
     expect(screen.getByText("Orlando")).toBeInTheDocument();
     expect(screen.getByText("NYC")).toBeInTheDocument();
   });
 
   it("renders job qualifications", () => {
-    const jobProps = createJobProps({
+    const jobProps = createJob({
       minimumQualifications: ["Code", "Develop"],
     });
     renderJobListing(jobProps);
