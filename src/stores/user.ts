@@ -7,6 +7,7 @@ export interface UserState {
   isLoggedIn: boolean;
   selectedOrganizations: string[];
   selectedJobTypes: string[];
+  selectedDegrees: string[];
 }
 
 export const useUserStore = defineStore("user", {
@@ -14,6 +15,7 @@ export const useUserStore = defineStore("user", {
     isLoggedIn: false,
     selectedOrganizations: [],
     selectedJobTypes: [],
+    selectedDegrees: [],
   }),
   actions: {
     loginUser() {
