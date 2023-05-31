@@ -6,7 +6,11 @@
       <div class="flex flex-row justify-between">
         <h3 class="my-4 text-base font-semibold">What do you want to do?</h3>
         <div class="flex items-center text-sm">
-          <ActionButton text="Clear Filters" type="secondary"></ActionButton>
+          <ActionButton
+            text="Clear Filters"
+            type="secondary"
+            @click="CLEAR_USER_JOB_FILTER_SELECTIONS"
+          ></ActionButton>
         </div>
       </div>
 
@@ -47,4 +51,7 @@ const degreeStore = useDegreesStore();
 const UNIQUE_JOB_TYPES = computed(() => jobsStore.UNIQUE_JOB_TYPES);
 const UNIQUE_ORGANIZATIONS = computed(() => jobsStore.UNIQUE_ORGANIZATIONS);
 const UNIQUE_DEGREES = computed(() => degreeStore.UNIQUE_DEGREES);
+
+const CLEAR_USER_JOB_FILTER_SELECTIONS =
+  userStore.CLEAR_USER_JOB_FILTER_SELECTIONS;
 </script>

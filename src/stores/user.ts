@@ -1,6 +1,9 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
+export const CLEAR_USER_JOB_FILTER_SELECTIONS =
+  "CLEAR_USER_JOB_FILTER_SELECTIONS";
+
 export const useUserStore = defineStore("user", () => {
   const isLoggedIn = ref(false);
   const selectedOrganizations = ref<string[]>([]);
