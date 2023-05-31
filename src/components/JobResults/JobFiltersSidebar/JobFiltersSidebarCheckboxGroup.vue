@@ -28,7 +28,7 @@ import CollapsibleAccordion from "@/components/Shared/CollapsibleAccordion.vue";
 
 const props = defineProps({
   header: { type: String, required: true },
-  uniqueValues: { type: Set<string>, required: true },
+  uniqueValues: { type: [Set<string>, Array<string>], required: true },
   action: { type: Function, required: true },
 });
 
