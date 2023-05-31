@@ -4,6 +4,9 @@ export const ADD_SELECTED_ORGANIZATIONS = "ADD_SELECTED_ORGANIZATIONS";
 export const ADD_SELECTED_JOB_TYPES = "ADD_SELECTED_JOB_TYPES";
 export const ADD_SELECTED_DEGREES = "ADD_SELECTED_DEGREES";
 
+export const CLEAR_USER_JOB_FILTER_SELECTIONS =
+  "CLEAR_USER_JOB_FILTER_SELECTIONS";
+
 export interface UserState {
   isLoggedIn: boolean;
   selectedOrganizations: string[];
@@ -30,6 +33,11 @@ export const useUserStore = defineStore("user", {
     },
     [ADD_SELECTED_DEGREES](degrees: string[]) {
       this.selectedDegrees = degrees;
+    },
+    [CLEAR_USER_JOB_FILTER_SELECTIONS]() {
+      this.selectedOrganizations = [];
+      this.selectedJobTypes = [];
+      this.selectedDegrees = [];
     },
   },
 });
