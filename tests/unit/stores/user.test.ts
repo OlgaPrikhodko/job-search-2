@@ -56,4 +56,12 @@ describe("actions", () => {
       expect(store.selectedJobTypes).toEqual(["Full-time", "Part-time"]);
     });
   });
+
+  describe("ADD_SELECTED_DEGREES", () => {
+    it("updates degrees that user has choseb to filter jobs", () => {
+      const store = useUserStore();
+      store.ADD_SELECTED_DEGREES(["Bachelor's", "Associate"]);
+      expect(store.selectedDegrees).toEqual(["Bachelor's", "Associate"]);
+    });
+  });
 });
