@@ -125,5 +125,21 @@ describe("actions", () => {
         expect(result).toBe(true);
       });
     });
+
+    describe("INCLUDE_JOB_BY_DEGREE", () => {
+      describe("when user has not selected any degree", () => {
+        it("includes job", () => {
+          const userStore = useUserStore();
+          userStore.selectedDegrees = [];
+
+          const jobStore = useJobsStore();
+
+          const job = createJob({ degree: "Bachelor's" });
+          const result = jobStore.INCLUDE_JOB_BY_DEGREE(job);
+
+          expect(result).toBe(true);
+        });
+      });
+    });
   });
 });
