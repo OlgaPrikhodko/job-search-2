@@ -1,43 +1,42 @@
 import { defineStore } from "pinia";
+import { ref } from "vue";
 
-export const ADD_SELECTED_ORGANIZATIONS = "ADD_SELECTED_ORGANIZATIONS";
-export const ADD_SELECTED_JOB_TYPES = "ADD_SELECTED_JOB_TYPES";
-export const ADD_SELECTED_DEGREES = "ADD_SELECTED_DEGREES";
+export const useUserStore = defineStore("user", () => {
+  const isLoggedIn = ref(false);
+  const selectedOrganizations = ref<string[]>([]);
+  const selectedJobTypes = ref<string[]>([]);
+  const selectedDegrees = ref<string[]>([]);
 
-export const CLEAR_USER_JOB_FILTER_SELECTIONS =
-  "CLEAR_USER_JOB_FILTER_SELECTIONS";
+  const LOGIN_USER = () => {
+    isLoggedIn.value = true;
+  };
+  const ADD_SELECTED_ORGANIZATIONS = (organizations: string[]) => {
+    selectedOrganizations.value = organizations;
+  };
 
-export interface UserState {
-  isLoggedIn: boolean;
-  selectedOrganizations: string[];
-  selectedJobTypes: string[];
-  selectedDegrees: string[];
-}
+  const ADD_SELECTED_JOB_TYPES = (jobTypes: string[]) => {
+    selectedJobTypes.value = jobTypes;
+  };
 
-export const useUserStore = defineStore("user", {
-  state: (): UserState => ({
-    isLoggedIn: false,
-    selectedOrganizations: [],
-    selectedJobTypes: [],
-    selectedDegrees: [],
-  }),
-  actions: {
-    loginUser() {
-      this.isLoggedIn = true;
-    },
-    [ADD_SELECTED_ORGANIZATIONS](organizations: string[]) {
-      this.selectedOrganizations = organizations;
-    },
-    [ADD_SELECTED_JOB_TYPES](jobTypes: string[]) {
-      this.selectedJobTypes = jobTypes;
-    },
-    [ADD_SELECTED_DEGREES](degrees: string[]) {
-      this.selectedDegrees = degrees;
-    },
-    [CLEAR_USER_JOB_FILTER_SELECTIONS]() {
-      this.selectedOrganizations = [];
-      this.selectedJobTypes = [];
-      this.selectedDegrees = [];
-    },
-  },
+  const ADD_SELECTED_DEGREES = (degrees: string[]) => {
+    selectedDegrees.value = degrees;
+  };
+
+  const CLEAR_USER_JOB_FILTER_SELECTIONS = () => {
+    selectedDegrees.value = [];
+    selectedJobTypes.value = [];
+    selectedOrganizations.value = [];
+  };
+
+  return {
+    isLoggedIn,
+    selectedDegrees,
+    selectedJobTypes,
+    selectedOrganizations,
+    LOGIN_USER,
+    ADD_SELECTED_ORGANIZATIONS,
+    ADD_SELECTED_JOB_TYPES,
+    ADD_SELECTED_DEGREES,
+    CLEAR_USER_JOB_FILTER_SELECTIONS,
+  };
 });
