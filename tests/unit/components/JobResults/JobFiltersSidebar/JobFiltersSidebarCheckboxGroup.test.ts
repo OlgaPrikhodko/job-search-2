@@ -1,6 +1,7 @@
 import type { Mock } from "vitest";
 import { render, screen } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
+import { createTestingPinia } from "@pinia/testing";
 
 import { useRouter } from "vue-router";
 vi.mock("vue-router");
@@ -10,14 +11,12 @@ import JobFiltersSidebarCheckboxGroup from "@/components/JobResults/JobFiltersSi
 
 describe("JobFiltersSidebarCheckboxGroup", () => {
   interface JobFiltersSidebarCheckboxGroupProps {
-    header: string;
     uniqueValues: Set<string>;
     action: Mock;
   }
   const createProps = (
     props: Partial<JobFiltersSidebarCheckboxGroupProps> = {}
   ): JobFiltersSidebarCheckboxGroupProps => ({
-    header: "Value Header",
     uniqueValues: new Set(["Value 1", "Value 2"]),
     action: vi.fn(),
     ...props,
@@ -26,9 +25,11 @@ describe("JobFiltersSidebarCheckboxGroup", () => {
   const renderJobFiltersSidebarCheckboxGroup = (
     props: JobFiltersSidebarCheckboxGroupProps
   ) => {
+    const pinia = createTestingPinia();
     render(JobFiltersSidebarCheckboxGroup, {
       props: { ...props },
       global: {
+        plugins: [pinia],
         stubs: { FontAwesomeIcon: true },
       },
     });
@@ -36,13 +37,9 @@ describe("JobFiltersSidebarCheckboxGroup", () => {
 
   it("renders unique list of values", async () => {
     const props = createProps({
-      header: "Job Types",
       uniqueValues: new Set(["Full-time", "Part-time"]),
     });
     renderJobFiltersSidebarCheckboxGroup(props);
-
-    const button = screen.getByRole("button", { name: /job types/i });
-    await userEvent.click(button);
 
     const filterList = screen.getAllByRole("listitem");
     const values = filterList.map((node) => node.textContent);
@@ -56,14 +53,11 @@ describe("JobFiltersSidebarCheckboxGroup", () => {
 
       const action = vi.fn();
       const props = createProps({
-        header: "Job Types",
         uniqueValues: new Set(["Full-time", "Part-time"]),
         action,
       });
       renderJobFiltersSidebarCheckboxGroup(props);
 
-      const button = screen.getByRole("button", { name: /job types/i });
-      await userEvent.click(button);
       const checkbox = screen.getByRole("checkbox", { name: /full-time/i });
       await userEvent.click(checkbox);
 
@@ -75,13 +69,10 @@ describe("JobFiltersSidebarCheckboxGroup", () => {
       useRouterMock.mockReturnValue({ push });
 
       const props = createProps({
-        header: "Job Types",
         uniqueValues: new Set(["Full-time", "Part-time"]),
       });
       renderJobFiltersSidebarCheckboxGroup(props);
 
-      const button = screen.getByRole("button", { name: /job types/i });
-      await userEvent.click(button);
       const checkbox = screen.getByRole("checkbox", { name: /full-time/i });
       await userEvent.click(checkbox);
 

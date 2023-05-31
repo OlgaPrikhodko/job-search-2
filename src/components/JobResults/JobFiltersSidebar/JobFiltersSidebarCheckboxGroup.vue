@@ -1,34 +1,30 @@
 <template>
-  <CollapsibleAccordion :header="header">
-    <div class="mt-5">
-      <fieldset>
-        <ul class="flex flex-row flex-wrap">
-          <li v-for="value in uniqueValues" :key="value" class="h-8 w-1/2">
-            <input
-              :id="value"
-              v-model="selectedValues"
-              :value="value"
-              type="checkbox"
-              class="mr-3"
-              @change="selectValue"
-            />
-            <label :for="value">{{ value }}</label>
-          </li>
-        </ul>
-      </fieldset>
-    </div>
-  </CollapsibleAccordion>
+  <div class="mt-5">
+    <fieldset>
+      <ul class="flex flex-row flex-wrap">
+        <li v-for="value in uniqueValues" :key="value" class="h-8 w-1/2">
+          <input
+            :id="value"
+            v-model="selectedValues"
+            :value="value"
+            type="checkbox"
+            class="mr-3"
+            @change="selectValue"
+          />
+          <label :for="value">{{ value }}</label>
+        </li>
+      </ul>
+    </fieldset>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 
-import CollapsibleAccordion from "@/components/Shared/CollapsibleAccordion.vue";
 import { useUserStore, CLEAR_USER_JOB_FILTER_SELECTIONS } from "@/stores/user";
 
 const props = defineProps({
-  header: { type: String, required: true },
   uniqueValues: { type: [Set<string>, Array<string>], required: true },
   action: { type: Function, required: true },
 });
