@@ -6,14 +6,6 @@ import { createJob } from "tests/utils/createJob";
 import type { Job } from "@/api/types";
 
 describe("JobListing", () => {
-  // const createJob = (jobProps = {}) => ({
-  //   title: "Vue Developer",
-  //   organization: "AirBnB",
-  //   locations: ["New York"],
-  //   minimumQualifications: ["Code"],
-  //   ...jobProps,
-  // });
-
   const renderJobListing = (job: Job) => {
     render(JobListing, {
       global: {
