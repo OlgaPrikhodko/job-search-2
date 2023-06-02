@@ -3,7 +3,7 @@
     <input
       v-model.lazy.trim="skillsSearchTerm"
       type="text"
-      class="border-brand-gray-1 h-12 w-full rounded border border-solid text-base shadow-gray"
+      class="border-brand-gray-1 h-12 w-full rounded border border-solid pl-2 text-base shadow-gray"
     />
   </div>
 </template>

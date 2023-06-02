@@ -12,7 +12,7 @@
         <TextInput
           id="role"
           v-model="role"
-          placeholder="Software ingeneer"
+          placeholder="Software engineer"
           :value="role"
         />
       </div>
