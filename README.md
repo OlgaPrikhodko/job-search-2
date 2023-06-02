@@ -1,3 +1,10 @@
+# description 
+This is copy of google careers site https://careers.google.com/ , developed with course on Udemy https://www.udemy.com/course/vue-masterclass/
+
+
+An amazing journey from bases of Option API syntax to Composition API with TypeScript. 100% test coverage with Vitest and Vue Testing Library. Used Vue Router, Pinia storage. Backend is mocked with JSON server. Styling with Tailwind.css.
+
+
 # job_search
 
 This template should help get you started developing with Vue 3 in Vite.
@@ -19,6 +26,7 @@ npm install
 ### Compile and Hot-Reload for Development
 
 ```sh
+npm run backend
 npm run dev
 ```
 
