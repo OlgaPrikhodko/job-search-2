@@ -26,6 +26,11 @@ describe("state", () => {
     const store = useUserStore();
     expect(store.selectedDegrees).toEqual([]);
   });
+
+  it("stores user's search term for skills and qualifications", () => {
+    const store = useUserStore();
+    expect(store.skillsSearchTerm).toEqual("");
+  });
 });
 
 describe("actions", () => {
@@ -62,6 +67,14 @@ describe("actions", () => {
       const store = useUserStore();
       store.ADD_SELECTED_DEGREES(["Bachelor's", "Associate"]);
       expect(store.selectedDegrees).toEqual(["Bachelor's", "Associate"]);
+    });
+  });
+
+  describe("UPDATE_SKILLS_SEARCH_TERM", () => {
+    it("receives search term for skills that user has entered", () => {
+      const store = useUserStore();
+      store.UPDATE_SKILLS_SEARCH_TERM("Software Engineer");
+      expect(store.skillsSearchTerm).toBe("Software Engineer");
     });
   });
 
