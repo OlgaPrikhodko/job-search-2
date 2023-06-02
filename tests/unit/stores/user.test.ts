@@ -84,12 +84,14 @@ describe("actions", () => {
       store.selectedDegrees = ["Associate"];
       store.selectedJobTypes = ["Part-time"];
       store.selectedOrganizations = ["Amazon"];
+      store.skillsSearchTerm = "Vue Developer";
 
       store.CLEAR_USER_JOB_FILTER_SELECTIONS();
 
       expect(store.selectedDegrees).toEqual([]);
       expect(store.selectedJobTypes).toEqual([]);
       expect(store.selectedOrganizations).toEqual([]);
+      expect(store.skillsSearchTerm).toBe("");
     });
   });
 });
